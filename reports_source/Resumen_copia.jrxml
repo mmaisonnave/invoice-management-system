@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Resumen_original" pageWidth="595" pageHeight="380" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="97ff6747-d996-4132-b94c-a0d5ca1c178d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<parameter name="denominacion" class="java.lang.String">
+		<defaultValueExpression><![CDATA["ARROQUY, Juan M. e Hijos (Oscar)"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CUIT" class="java.lang.String">
+		<defaultValueExpression><![CDATA["20-36698447-0"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha_emision" class="java.lang.String">
+		<defaultValueExpression><![CDATA["31/3/2018"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="desde" class="java.lang.String">
+		<defaultValueExpression><![CDATA["10/12/2018"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="hasta" class="java.lang.String">
+		<defaultValueExpression><![CDATA["11/12/2018"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="saldo_inicial" class="java.lang.Double">
+		<defaultValueExpression><![CDATA[0.0]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[descripcion]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.lang.String">
+		<fieldDescription><![CDATA[fecha]]></fieldDescription>
+	</field>
+	<field name="haber" class="java.lang.Double">
+		<fieldDescription><![CDATA[haber]]></fieldDescription>
+	</field>
+	<field name="debe" class="java.lang.Double">
+		<fieldDescription><![CDATA[debe]]></fieldDescription>
+	</field>
+	<field name="saldo" class="java.lang.Double">
+		<fieldDescription><![CDATA[saldo]]></fieldDescription>
+	</field>
+	<variable name="haber_total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{haber}]]></variableExpression>
+	</variable>
+	<variable name="debe_total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{debe}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="119" splitType="Stretch">
+			<staticText>
+				<reportElement x="5" y="65" width="120" height="18" uuid="3000c7a9-9baf-44ca-bccc-4431f1adc7fb"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sr/es:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="83" width="120" height="18" uuid="a1626d46-ed31-42ed-8018-d3a2ac754e34"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[C.U.I.T.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="101" width="120" height="18" uuid="63a98c72-3057-4c35-b1c6-7ab6ab3cc0fe"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Emisión:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="101" width="60" height="18" uuid="2426a630-9300-45a9-aea2-10705523e3b8"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hasta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="83" width="60" height="18" uuid="896a4303-8f21-4876-995c-ea316b2b5473"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desde:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="65" width="260" height="18" uuid="33f95b80-265c-4bd1-85f4-bbc8b287dad1"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{denominacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="83" width="260" height="18" uuid="86556168-c3e0-4223-a139-5bc24004d94f"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CUIT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="101" width="260" height="18" uuid="a98e67cd-f1cd-4314-80e9-faafd7a5cd38"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha_emision}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="465" y="83" width="85" height="18" uuid="7d21938c-2fc5-46c9-a3d9-d3afb81ee129"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{desde}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="465" y="101" width="85" height="18" uuid="3614448a-b7f7-4c85-b5a6-df5c1f239034"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hasta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="400" y="65" width="150" height="18" uuid="80485086-17c6-4bac-b589-ca4d618002ce"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DUPLICADO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="55" width="555" height="1" uuid="7fe2c750-e6a5-4535-bf0e-c85483665eb6"/>
+			</line>
+			<staticText>
+				<reportElement x="5" y="5" width="545" height="20" uuid="4d6b1d8c-8bf6-4460-b2da-55f0b695402e"/>
+				<textElement textAlignment="Center">
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Estudio Contable Arnoldo Maisonnave - Gladys S. Hermosilla]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="30" width="545" height="20" uuid="38f79faa-f9c8-450f-b70b-4085b7bd43fa"/>
+				<textElement textAlignment="Center">
+					<font size="14" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Mitre 811 - Tel. 2926 422857/424120 - Coronel Suárez]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="524b0a16-3f37-4d61-b048-1453573fc625"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement x="5" y="10" width="80" height="18" uuid="2b8577fc-f4ce-46d4-9f50-6a990fa9ba57"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="10" width="195" height="18" uuid="ed6c3394-85ff-443d-89ff-7c685611a5ec"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="10" width="90" height="18" uuid="051a60a4-180f-419b-8d31-c028d7b25644"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Debe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="10" width="90" height="18" uuid="54769927-a220-49e9-ae6e-3390054dc8cc"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Haber]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="10" width="90" height="18" uuid="47844285-1991-417c-83de-f8d20e2b0ed0"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="28" width="195" height="18" uuid="696e8843-bc54-4573-98d3-af3d2847327d">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER}==1 ]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Saldo Inicial:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="460" y="28" width="90" height="18" uuid="fe1fc8ed-af79-4d6b-bd1e-919a817f9ba1">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER}==1 ]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[String.format("%,.2f", $P{saldo_inicial} )]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField>
+				<reportElement x="460" y="0" width="90" height="14" uuid="cda70ccd-f0f8-43b4-8cf3-5d1925a9482b"/>
+				<textElement textAlignment="Right">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[String.format("%,.2f",$F{saldo})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="85" y="0" width="195" height="14" uuid="3f19dff1-d36c-41ba-89d7-60a4c30ab9ed"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="90" height="14" uuid="8657c8c6-04bc-4208-a678-01fa55634176"/>
+				<textElement textAlignment="Right">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[String.format("%,.2f",$F{debe})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="90" height="14" uuid="3dad35b9-fd6e-409c-9286-d6e461ff184a"/>
+				<textElement textAlignment="Right">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[String.format("%,.2f",$F{haber})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="0" width="80" height="14" uuid="61cf4fa0-0886-4a64-ae53-fc1798cfbf23"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement x="355" y="10" width="100" height="30" uuid="de6b4cb6-52b4-4e9b-a91e-f4da8d0e52aa"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="455" y="10" width="100" height="30" uuid="6e1efce3-d7fa-4066-9045-57c6143a0f1c"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="60">
+			<staticText>
+				<reportElement x="335" y="9" width="95" height="18" uuid="2bf41313-19f5-4bd9-b9c6-1270140f6be0"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo Final:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="355" y="30" width="100" height="30" uuid="32dc9b4b-730e-417c-b6bc-bf250341dc92"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="455" y="30" width="100" height="30" uuid="643f620c-ea34-4be8-abb6-1459d87d737c"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="9" width="110" height="18" uuid="aa58286a-7ee7-4482-b7e0-416ed950adbd"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$ "+String.format("%,.2f",($P{saldo_inicial} -$V{debe_total}+$V{haber_total}))]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>
