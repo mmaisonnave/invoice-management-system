@@ -2,5 +2,21 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 8 [1.8.0_201]"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/spring-core-3.2.18.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/spring-beans-3.2.18.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/mysql-connector-java-5.1.45-bin.jar"/>
+	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/joda-time-2.9.9.jar"/>
+	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/jasperreports-metadata-6.5.1.jar"/>
+	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/jasperreports-javaflow-6.5.1.jar"/>
+	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/jasperreports-functions-6.5.1.jar"/>
+	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/jasperreports-fonts-6.5.1.jar"/>
+	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/jasperreports-6.5.1.jar"/>
+	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/itext-2.1.7.js6-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/commons-digester-1.8.1.jar"/>
+	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/commons-collections3-3.2.2.jar"/>
+	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/bcmail-jdk15-146.jar"/>
+	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/OpenViewerFX-7.1.27.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
