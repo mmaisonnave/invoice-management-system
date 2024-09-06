@@ -2,12 +2,12 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 8 [1.8.0_201]"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/commons-javaflow-1590792-patched-play-1.3.0.jar"/>
 	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/spring-core-3.2.18.RELEASE.jar"/>
 	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/spring-beans-3.2.18.RELEASE.jar"/>
 	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/mysql-connector-java-5.1.45-bin.jar"/>
 	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/joda-time-2.9.9.jar"/>
 	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/jasperreports-metadata-6.5.1.jar"/>
-	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/jasperreports-javaflow-6.5.1.jar"/>
 	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/jasperreports-functions-6.5.1.jar"/>
 	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/jasperreports-fonts-6.5.1.jar"/>
 	<classpathentry kind="lib" path="/Users/marianomaisonnave/git/programa-facturacion-mh/lib/jasperreports-6.5.1.jar"/>

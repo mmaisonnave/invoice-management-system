@@ -67,7 +67,15 @@ public class Main extends Application {
     	//Primero, voy a las carpetas de reportes y borro lo que haya en tmp
     	File A = new File("reportes/tmp/");
     	File B = new File("borradores/tmp/");
-    	
+
+        // Create directories if they don't exist
+        if (!A.exists()) {
+            A.mkdirs(); // Create the directory and any necessary parent directories
+        }
+        if (!B.exists()) {
+            B.mkdirs(); // Create the directory and any necessary parent directories
+        }
+  
     	for(File file: A.listFiles()) 
     	    if (!file.isDirectory()) 
     	        file.delete();
