@@ -138,6 +138,8 @@ public class RegistrarPagoOverviewController {
 	 	observacionesTextArea.textProperty().addListener((obs, oldText, newText) -> {
             if (oldText.length() < 100 && newText.length() >= 100) {
             	importeTextField.requestFocus();
+            	
+            	observacionesTextArea.setText(oldText);
             }
          });
    	 

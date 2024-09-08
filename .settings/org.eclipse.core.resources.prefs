@@ -1,5 +1,11 @@
 eclipse.preferences.version=1
+encoding//reports_source/Lista_ctas_ctes.jrxml=UTF-8
 encoding//reports_source/Original.jrxml=UTF-8
+encoding//reports_source/Original_y_copia.jrxml=UTF-8
+encoding//reports_source/Presupuesto_borrador.jrxml=UTF-8
+encoding//reports_source/Resumen_cuenta.jrxml=UTF-8
+encoding//reports_source/Resumen_cuenta_simple.jrxml=UTF-8
+encoding//reports_source/Resumen_original.jrxml=UTF-8
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
 encoding/<project>=UTF-8

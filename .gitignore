@@ -5,3 +5,4 @@
 /reportes/
 **/*jrprint
 /target/
+reports_source/*jasper
