@@ -47,6 +47,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import net.sf.jasperreports.engine.JRException;
@@ -886,6 +887,38 @@ public class VerPresupuestosOverviewController {
 		alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
 		alert.showAndWait();
 	}}
+    
+    @FXML
+    private void handleGuardarTodosPDF(){
+    	DirectoryChooser directoryChooser = new DirectoryChooser();
+    	directoryChooser.setTitle("Guardar todos los presupuesto");
+    	
+    	File dest = directoryChooser.showDialog(dialogStage);
+
+
+        if (dest != null) {
+            System.out.println("Selected folder: " + dest.getAbsolutePath());
+            String filename;
+            for (Presupuesto p : presupuestosTable.getItems()) {
+                // Call a method on each 'Presupuesto' object
+
+            	filename =  dest.getAbsolutePath()+"/"+p.getCliente().getDenominacion()+"-"+p.getNroPresupuesto()+".pdf";
+
+            	ReportsEngine.generarReporte(p, filename);
+            }  
+    		Alert alert = new Alert(AlertType.INFORMATION);
+    		alert.initOwner(dialogStage);
+    		alert.setTitle("Guardado finalizado");
+    		alert.setHeaderText(null);
+    		alert.setContentText("Guardado finalizado.");
+    		alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+    		alert.showAndWait();
+
+        } else {
+            System.out.println("No folder selected");
+        }
+
+    }
     
     @FXML
     private void handleGuardarPDF(){

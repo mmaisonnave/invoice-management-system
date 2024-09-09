@@ -67,6 +67,7 @@
                               <HBox layoutX="14.0" layoutY="298.0" spacing="30.0" AnchorPane.bottomAnchor="14.0">
                                  <children>
                                     <Button fx:id="PDFButton" mnemonicParsing="false" onAction="#handleGuardarPDF" text="Guardar PDF" />
+                                    <Button fx:id="PDFButton" mnemonicParsing="false" onAction="#handleGuardarTodosPDF" text="Guardar Todos (PDF)" />
                                     <Button fx:id="vistaPreviaButton" mnemonicParsing="false" onAction="#handleVistaPrevia" text="Vista Previa Seleccionado" />
                                     <Button fx:id="imprimirTodosButton" mnemonicParsing="false" onAction="#handleImprimirTodos" text="Vista Previa Todos" />
                                  </children>
