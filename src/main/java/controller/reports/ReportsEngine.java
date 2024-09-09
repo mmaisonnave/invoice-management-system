@@ -160,7 +160,13 @@ public class ReportsEngine {
 
 	parameters.put("denominacion",p.getCliente().getDenominacion());
 	String direccion = p.getCliente().getDireccion()!=null? p.getCliente().getDireccion():"";
-	direccion +=      p.getCliente().getLocalidad()!=null? p.getCliente().getLocalidad():"";
+	
+	if (p.getCliente().getLocalidad()!=null){
+		if (! direccion.isEmpty()){
+			direccion+=", ";
+		}
+		direccion += p.getCliente().getLocalidad();
+	}
 	parameters.put("domicilio",direccion);
 	parameters.put("iva",p.getCliente().getFormattedCondicionIva());
 	parameters.put("Alicuota",new Double(p.getAlicuota()));
@@ -255,7 +261,13 @@ public class ReportsEngine {
 
 		parameters.put("denominacion",p.getCliente().getDenominacion());
 		String direccion = p.getCliente().getDireccion()!=null? p.getCliente().getDireccion():"";
-		direccion +=      p.getCliente().getLocalidad()!=null? p.getCliente().getLocalidad():"";
+//		direccion +=      p.getCliente().getLocalidad()!=null? p.getCliente().getLocalidad():"";
+		if (p.getCliente().getLocalidad()!=null){
+			if (! direccion.isEmpty()){
+				direccion+=", ";
+			}
+			direccion += p.getCliente().getLocalidad();
+		}
 		parameters.put("domicilio",direccion);
 		parameters.put("iva",p.getCliente().getFormattedCondicionIva());
 		parameters.put("Alicuota",new Double(p.getAlicuota()));
