@@ -679,6 +679,7 @@ public class DBEngine {
 	}
 
 	/**
+	 * (NOT USED)
 	 * Método que recibe un nro_presupuesto y consulta a la base de datos por el
 	 * presupuesto que se corresponde con dicho numero. Como el número es único en
 	 * la base de datos, solo retorna uno, o ninguno (null) si no existe tal
@@ -1344,7 +1345,7 @@ public class DBEngine {
 	 * @return Retorna la Transaccion que se generó al efectiviar el presupuesto
 	 * @throws InvalidBudgetException
 	 */
-	public Transaccion efectivizarPresupuesto(Presupuesto p) throws InvalidBudgetException {
+	public Transaccion efectivizarPresupuesto(Presupuesto p, Date fecha_efectivizacion) throws InvalidBudgetException {
 		if (!p.hasValidNumber())
 			throw new InvalidBudgetException("Presupuesto no creado en base de datos.");
 
@@ -1368,7 +1369,8 @@ public class DBEngine {
 			double nuevo_estado = estado_cuenta_corriente - montoTotal;
 			this.actualizarEstadoCuentaCorriente(p.getCliente(), nuevo_estado);
 			// REGISTRAR TRANSACCION
-			t = new Transaccion(p.getCliente(), Calendar.getInstance().getTime(), 'D', montoTotal, "", nuevo_estado);
+			// Utilizamos la fecha provista por el usuario. 
+			t = new Transaccion(p.getCliente(), fecha_efectivizacion, 'D', montoTotal, "", nuevo_estado);
 
 			preparedStmt = conn.prepareStatement(query);
 			preparedStmt.setInt(1, p.getCliente().getCodigoCliente());
@@ -1407,9 +1409,9 @@ public class DBEngine {
 				e.printStackTrace();
 			}
 
-			p.setFecha(Calendar.getInstance().getTime()); // Ponemos la fecha en que se efectivizo en el objeto y
-															// posteriormente
-															// la corregimos en la base de datos
+			p.setFecha(fecha_efectivizacion); // Ponemos la fecha en que se efectivizo en el objeto (fecha provista por el usuario y
+										      // posteriormente
+											  // la corregimos en la base de datos
 			// HACEMOS EFECTIVO EL PRESU EN LA BASE DE DATOS
 			query = "UPDATE Presupuesto SET Efectivo = 'S', Fecha = ?, Nro_Transaccion = ?  WHERE Nro_Presupuesto = ? "; // lo
 																															// hacemos

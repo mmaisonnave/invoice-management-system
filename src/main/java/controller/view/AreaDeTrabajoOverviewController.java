@@ -1,5 +1,9 @@
 package controller.view;
 
+import javafx.scene.Node;
+import javafx.scene.layout.StackPane;
+import javafx.geometry.Pos;
+import javafx.beans.binding.Bindings;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +17,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -38,6 +43,13 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.application.Platform;
 
+import javafx.application.Application;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.sql.Date;
 import java.util.Optional;
 
 import javafx.concurrent.Task;
@@ -311,33 +323,45 @@ public class AreaDeTrabajoOverviewController  {
      private void handleEfectivizarUno() {
     	 Presupuesto selectedPresupuesto = presupuestosTable.getSelectionModel().getSelectedItem();
          if (selectedPresupuesto != null) {
-         	  // Se procede a alertar al usuario
-              Alert alert = new Alert(AlertType.CONFIRMATION, 
- 		  			 "",
-                    ButtonType.YES, 
-                    ButtonType.NO);
-              alert.initOwner(mainApp.getPrimaryStage());
-              alert.setTitle("Efectivizar presupuesto");
-              alert.setHeaderText("Presupuesto seleccionado: "+ selectedPresupuesto.getNroPresupuesto()+ " - "
-            		  			  + selectedPresupuesto.getCliente().getDenominacion());
-              alert.setContentText("¿Desea efectivizar el presupuesto seleccionado?");
-              alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-              Optional<ButtonType> result = alert.showAndWait();
+        	 
+        	 // Create Dialog Asking for confirmation and a date to make invoice effective on that date:
+             Dialog<LocalDate> dialog = new Dialog<>();
+             dialog.setTitle("Confirmar Efectivización de Presupuesto");
+             Label label =  new Label("¿Desea efectivizar el presupuesto "+selectedPresupuesto.getNroPresupuesto()+"-"+selectedPresupuesto.getCliente().getDenominacion()+"?");
+             
+             DatePicker datePicker = new DatePicker(LocalDate.now());
+             HBox hbox_with_datepicker =  new HBox(new Label("Fecha de Efectivización: "), datePicker);
+             hbox_with_datepicker.setAlignment(Pos.CENTER_LEFT);  // Aligns the Label and DatePicker
 
-              if (result.get() == ButtonType.YES) {
-             	 //Efectivizo el presupuesto en la base de datos
+             dialog.getDialogPane().setContent(new VBox(10, label, hbox_with_datepicker));
+             dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+             dialog.setResultConverter(button -> button == ButtonType.OK ? datePicker.getValue() : null);
+             dialog.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+             dialog.getDialogPane().setMinWidth(Region.USE_PREF_SIZE);
+
+
+             Optional<LocalDate> result = dialog.showAndWait();
+
+             // Handle the result based on OK or Cancel button press
+             if (result.isPresent()) {
+                 LocalDate selectedDate = result.get();
+                 Date fecha_efectivizacion = Date.valueOf(selectedDate);
+
+                 System.out.println("Confirmed with date: " + selectedDate);
+                 // Add behavior for confirm button click
              	 try{
-             		 DBMotor.efectivizarPresupuesto(selectedPresupuesto);
-                     
+             		 DBMotor.efectivizarPresupuesto(selectedPresupuesto, fecha_efectivizacion);
              	 }
              	 catch(InvalidBudgetException e){
              		e.printStackTrace();
              		System.out.println("La efectivización del presupuesto "+ selectedPresupuesto.getNroPresupuesto() + " tiro error.");
              	 }
+
              	 //Actualizo contenido tabla en la vista
              	 handleSearch();
              	 //Se informa al usuario que termino el proceso
-                  alert = new Alert(AlertType.INFORMATION, 
+                  Alert alert = new Alert(AlertType.INFORMATION, 
      		  			 "",
                         ButtonType.OK);
                   alert.initOwner(mainApp.getPrimaryStage());
@@ -346,10 +370,94 @@ public class AreaDeTrabajoOverviewController  {
                   alert.setContentText("Se ha efectivizado el presupuesto nº "+ selectedPresupuesto.NroPresupuestoStringProperty().get());
                   alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                   alert.showAndWait();
-              }
-              else{
-             	 //No hago nada y cierro
-              }
+                 
+             } else {
+                 // Add behavior for cancel button click
+                 System.out.println("Action was cancelled.");
+             }
+
+             
+             
+//             result.ifPresent(date -> System.out.println("Invoice effective date: " + date));
+
+//        	 LocalDate date_now = LocalDate.now(); 
+//        	 DatePicker datePicker = new DatePicker(date_now);
+//              Alert alert = new Alert(AlertType.CONFIRMATION, 
+// 		  			 "",
+//                    ButtonType.YES, 
+//                    ButtonType.NO
+//                    );
+//              
+//              alert.initOwner(mainApp.getPrimaryStage());
+//              alert.setTitle("Efectivizar presupuesto");
+//              alert.setHeaderText("Presupuesto seleccionado: "+ selectedPresupuesto.getNroPresupuesto()+ " - "
+//            		  			  + selectedPresupuesto.getCliente().getDenominacion());
+//              alert.setContentText("¿Desea efectivizar el presupuesto seleccionado?");
+//
+//              
+//              alert.getDialogPane().setMinHeight(500);
+//              alert.getDialogPane().setMinWidth(1000);
+//              
+//              System.out.println("Size of children= "+alert.getDialogPane().getChildren().size());
+//              for (int i=0; i<alert.getDialogPane().getChildren().size(); i++) {
+//            	  System.out.println(alert.getDialogPane().getChildren().get(i));
+//              }
+//              
+//              GridPane gridPane = (GridPane) alert.getDialogPane().getChildren().get(0);
+//              
+//              System.out.println("Iterating over the "+gridPane.getShape()+" elements of the grid panel");
+//              for (Node node : gridPane.getChildren()) {
+//            	    // Print each node's class type and other information
+//            	    System.out.println("Node: " + node.getClass());
+//            	    
+//            	    // Optionally, you can print more details about each node
+//            	    System.out.println("Node details: " + node.toString());
+//            	}
+//              
+////              ((GridPane)alert.getDialogPane().getChildren().get(0)).getChildren().add(datePicker);
+//              StackPane stackPane = ((StackPane) gridPane.getChildren().get(1));
+//              stackPane.getChildren().add(datePicker);
+//              
+//              System.out.println("AFTER ADDING: Iterating over the "+gridPane.getShape()+" elements of the grid panel");
+//              for (Node node : gridPane.getChildren()) {
+//            	    // Print each node's class type and other information
+//            	    System.out.println("Node: " + node.getClass());
+//            	    
+//            	    // Optionally, you can print more details about each node
+//            	    System.out.println("Node details: " + node.toString());
+//            	}
+//              
+//              
+//              Optional<ButtonType> result = alert.showAndWait();
+//
+//              if (result.get() == ButtonType.YES) {
+//             	 //Efectivizo el presupuesto en la base de datos
+//             	 try{
+//             		 
+//             		 
+//             		 DBMotor.efectivizarPresupuesto(selectedPresupuesto);
+//                     
+//             	 }
+//             	 catch(InvalidBudgetException e){
+//             		e.printStackTrace();
+//             		System.out.println("La efectivización del presupuesto "+ selectedPresupuesto.getNroPresupuesto() + " tiro error.");
+//             	 }
+//             	 //Actualizo contenido tabla en la vista
+//             	 handleSearch();
+//             	 //Se informa al usuario que termino el proceso
+//                  alert = new Alert(AlertType.INFORMATION, 
+//     		  			 "",
+//                        ButtonType.OK);
+//                  alert.initOwner(mainApp.getPrimaryStage());
+//                  alert.setTitle("Efectivizar presupuesto");
+//                  alert.setHeaderText(null);
+//                  alert.setContentText("Se ha efectivizado el presupuesto nº "+ selectedPresupuesto.NroPresupuestoStringProperty().get());
+//                  alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+//                  alert.showAndWait();
+//              }
+//              else{
+//             	 //No hago nada y cierro
+//              }
     	 } 
          else {
              // No se seleccionó ningún cliente
@@ -403,8 +511,8 @@ public class AreaDeTrabajoOverviewController  {
          		    	//Efectivizo cada item de la lista
                         for (Presupuesto p : lista){
         		    		try{
-        		    			
-                   			 	DBMotor.efectivizarPresupuesto(p);
+        		    			Date fecha_efectivizacion=null;
+                   			 	DBMotor.efectivizarPresupuesto(p, fecha_efectivizacion);
                    			 	
         		    		}
                         	catch(InvalidBudgetException e){

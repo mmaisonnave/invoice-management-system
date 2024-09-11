@@ -32,6 +32,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
+import java.sql.Date;
 import java.util.Optional;
 
 import controller.db.Presupuesto;
@@ -327,7 +328,9 @@ public class ModificarPresupuestoOverviewController {
 	              if (resultado.get() == ButtonType.YES) {
 	             	 //Efectivizo el presupuesto en la base de datos
 	             	 try{
-	             		 DBMotor.efectivizarPresupuesto(presupuesto);
+	             		 // TO-DO
+	             		 Date fecha_efectivizacion = null;
+	             		 DBMotor.efectivizarPresupuesto(presupuesto, fecha_efectivizacion);
 	                     
 	             	 }
 	             	 catch(InvalidBudgetException e){
