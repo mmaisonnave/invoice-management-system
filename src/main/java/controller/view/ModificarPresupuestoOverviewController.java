@@ -33,6 +33,7 @@ import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import controller.db.Presupuesto;
@@ -300,36 +301,45 @@ public class ModificarPresupuestoOverviewController {
 			if(this.propietario.getClass().getName().equals("controller.Main")){
 				
 				 //DESEA ADEMÁS EFECTIVIZAR?
-				 Alert alerta = new Alert(AlertType.CONFIRMATION, 
-	 		  			 "",
-	                    ButtonType.YES, 
-	                    ButtonType.NO);
-				 
-				 
-				//Deactivate Defaultbehavior for yes-Button:
-				Button yesButton = (Button) alerta.getDialogPane().lookupButton( ButtonType.YES );
-				yesButton.setDefaultButton( false );
-
-				//Activate Defaultbehavior for no-Button:
-				Button noButton = (Button) alerta.getDialogPane().lookupButton( ButtonType.NO );
-				noButton.setDefaultButton( true );
-
-				 
-				 
-	              alerta.initOwner(dialogStage);
-	              alerta.setTitle("Efectivizar presupuesto");
-	              alerta.setHeaderText("Presupuesto seleccionado: "+ presupuesto.getNroPresupuesto()+ " - "
-	            		  			  + presupuesto.getCliente().getDenominacion());
-	              alerta.setContentText("¿Desea efectivizar el presupuesto creado? \n\nSi pulsa \"NO\" el presupuesto estará abierto en el menú Área de trabajo.");
-	              alerta.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-	              Optional<ButtonType> resultado = alerta.showAndWait();
-
+//				 Alert alerta = new Alert(AlertType.CONFIRMATION, 
+//	 		  			 "",
+//	                    ButtonType.YES, 
+//	                    ButtonType.NO);
+//				 
+//				 
+//				//Deactivate Defaultbehavior for yes-Button:
+//				Button yesButton = (Button) alerta.getDialogPane().lookupButton( ButtonType.YES );
+//				yesButton.setDefaultButton( false );
+//
+//				//Activate Defaultbehavior for no-Button:
+//				Button noButton = (Button) alerta.getDialogPane().lookupButton( ButtonType.NO );
+//				noButton.setDefaultButton( true );
+//
+//				 
+//				 
+//	              alerta.initOwner(dialogStage);
+//	              alerta.setTitle("Efectivizar presupuesto");
+//	              alerta.setHeaderText("Presupuesto seleccionado: "+ presupuesto.getNroPresupuesto()+ " - "
+//	            		  			  + presupuesto.getCliente().getDenominacion());
+//	              alerta.setContentText("¿Desea efectivizar el presupuesto creado? \n\nSi pulsa \"NO\" el presupuesto estará abierto en el menú Área de trabajo.");
+//	              alerta.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+//	              Optional<ButtonType> resultado = alerta.showAndWait();
+	
+				  String title="Efectivizar presupuesto";
+				  String message="Presupuesto Guardado.\n"+
+						  		"¿Desea efectivizar el presupuesto "+presupuesto.getNroPresupuesto()+" - "+presupuesto.getCliente().getDenominacion()+"?\n\n"
+						  				+"Pulsa \"Ok\" para efectivizar. Si pulsa \"Cancel\" el presupuesto estará abierto en el menú Área de trabajo.";
+				  
+		          Optional<LocalDate> prompt_date_result = Dialogs.promptUserForDate(title, message);
+		          	
+	        	
 	              //DESEA ADEMAS EFECTIVIZAR = 0K
-	              if (resultado.get() == ButtonType.YES) {
+	             if (prompt_date_result.isPresent()) {
+		             LocalDate selectedDate = prompt_date_result.get();
+		             Date fecha_efectivizacion = Date.valueOf(selectedDate);
 	             	 //Efectivizo el presupuesto en la base de datos
 	             	 try{
 	             		 // TO-DO
-	             		 Date fecha_efectivizacion = null;
 	             		 DBMotor.efectivizarPresupuesto(presupuesto, fecha_efectivizacion);
 	                     
 	             	 }

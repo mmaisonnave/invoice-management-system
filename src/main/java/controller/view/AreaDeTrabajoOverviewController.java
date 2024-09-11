@@ -314,6 +314,8 @@ public class AreaDeTrabajoOverviewController  {
     
     //-------------------------------BOTONES----------------------------------
     
+
+    
     /**
       * LLamado cuando el usuario hace click en el boton Nuevo. Abre un 
       * diálogo para crear un nuevo cliente.
@@ -323,26 +325,10 @@ public class AreaDeTrabajoOverviewController  {
      private void handleEfectivizarUno() {
     	 Presupuesto selectedPresupuesto = presupuestosTable.getSelectionModel().getSelectedItem();
          if (selectedPresupuesto != null) {
+        	 String title = "Confirmar Efectivización de Presupuesto";
+        	 String message = "¿Desea efectivizar el presupuesto "+selectedPresupuesto.getNroPresupuesto()+"-"+selectedPresupuesto.getCliente().getDenominacion()+"?";
+        	 Optional<LocalDate> result = Dialogs.promptUserForDate(title, message);
         	 
-        	 // Create Dialog Asking for confirmation and a date to make invoice effective on that date:
-             Dialog<LocalDate> dialog = new Dialog<>();
-             dialog.setTitle("Confirmar Efectivización de Presupuesto");
-             Label label =  new Label("¿Desea efectivizar el presupuesto "+selectedPresupuesto.getNroPresupuesto()+"-"+selectedPresupuesto.getCliente().getDenominacion()+"?");
-             
-             DatePicker datePicker = new DatePicker(LocalDate.now());
-             HBox hbox_with_datepicker =  new HBox(new Label("Fecha de Efectivización: "), datePicker);
-             hbox_with_datepicker.setAlignment(Pos.CENTER_LEFT);  // Aligns the Label and DatePicker
-
-             dialog.getDialogPane().setContent(new VBox(10, label, hbox_with_datepicker));
-             dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-
-             dialog.setResultConverter(button -> button == ButtonType.OK ? datePicker.getValue() : null);
-             dialog.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-             dialog.getDialogPane().setMinWidth(Region.USE_PREF_SIZE);
-
-
-             Optional<LocalDate> result = dialog.showAndWait();
-
              // Handle the result based on OK or Cancel button press
              if (result.isPresent()) {
                  LocalDate selectedDate = result.get();
@@ -478,8 +464,6 @@ public class AreaDeTrabajoOverviewController  {
       */
      @FXML
      private void handleEfectivizarTodos() {
-
-        
     	 //Primero recupero la lista de presupuestos no efectivos desde la DB
     	 mainApp.setPresupuestosNoEfectivosData_DB();
     	 ObservableList<Presupuesto> lista = mainApp.getPresupuestosNoEfectivosData();
@@ -488,30 +472,27 @@ public class AreaDeTrabajoOverviewController  {
     	 if (!lista.isEmpty()){
     		 //Hay algo en la lista, luego hay que efectivizarlo
          	 // Se procede a alertar al usuario
-             Alert alert = new Alert(AlertType.CONFIRMATION, 
- 		  			 "",
-                    ButtonType.YES, 
-                    ButtonType.NO);
-             alert.initOwner(mainApp.getPrimaryStage());
-             alert.setTitle("Efectivizar todo");
-             alert.setHeaderText("Cantidad total de presupuestos: " + lista.size());
-             alert.setContentText("¿Desea efectivizar TODOS los presupuestos no efectivos?");
-             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-             Optional<ButtonType> result = alert.showAndWait();
+    		 String title="Confirmar Efectivización de Presupuesto";
+    		 String message="¿Desea efectivizar todos los presupuestos?";
+//    		 Optional<ButtonType> result = alert.showAndWait();
+    		 Optional<LocalDate> result = Dialogs.promptUserForDate(title, message);
+    		 
+             if (result.isPresent()) {
+                 LocalDate selectedDate = result.get();
+                 Date fecha_efectivizacion = Date.valueOf(selectedDate);
 
-             
-             if (result.get() == ButtonType.YES) {
+                 System.out.println("Confirmed with date: " + selectedDate);
+
             	
             	 //Efectivizo TODOS los presupuestos en la base de datos.
             	 
-              	Task<Void> task_efectivizar = new Task<Void>() {
+              	 Task<Void> task_efectivizar = new Task<Void>() {
          		    @Override
          		    protected Void call() throws Exception {
          		    	
          		    	//Efectivizo cada item de la lista
                         for (Presupuesto p : lista){
         		    		try{
-        		    			Date fecha_efectivizacion=null;
                    			 	DBMotor.efectivizarPresupuesto(p, fecha_efectivizacion);
                    			 	
         		    		}
@@ -568,6 +549,7 @@ public class AreaDeTrabajoOverviewController  {
              }
              else{
             	 //No hago nada: el usuario eligió el botón NO.
+            	 System.out.println("User cancel efectivizar todos.");
               }
     	 } 
          else {

@@ -277,12 +277,12 @@ public class VerPresupuestosOverviewController {
     	                                setDisable(true);
     	                                setStyle("-fx-background-color: #d3d3d3;");
     	                        }
-    	                        if (item.isAfter(
-    	                                LocalDate.now()) 
-    	                        		){
-    	                                setDisable(true);
-    	                                setStyle("-fx-background-color: #d3d3d3;");
-    	                        }
+//    	                        if (item.isAfter(
+//    	                                LocalDate.now()) 
+//    	                        		){
+//    	                                setDisable(true);
+//    	                                setStyle("-fx-background-color: #d3d3d3;");
+//    	                        }
     	                        if (item.isBefore(
     	                        		LocalDate.of(2003, 1, 1)) 
     	                        		){
@@ -302,12 +302,12 @@ public class VerPresupuestosOverviewController {
         	                    @Override
         	                    public void updateItem(LocalDate item, boolean empty) {
         	                        super.updateItem(item, empty);
-        	                        if (item.isAfter(
-        	                                LocalDate.now()) 
-        	                        		){
-        	                                setDisable(true);
-        	                                setStyle("-fx-background-color: #d3d3d3;");
-        	                        }
+//        	                        if (item.isAfter(
+//        	                                LocalDate.now()) 
+//        	                        		){
+//        	                                setDisable(true);
+//        	                                setStyle("-fx-background-color: #d3d3d3;");
+//        	                        }
         	                        if (item.isBefore(
         	                        		LocalDate.of(2003, 1, 1)) 
         	                        		){
@@ -517,10 +517,10 @@ public class VerPresupuestosOverviewController {
 			
 			//Chequeo errores en las fechas
 			boolean error = false;
-			if(desdeDatePicker.getValue().isAfter(NOW) || hastaDatePicker.getValue().isAfter(NOW)){
-				errorMessage = errorMessage.concat("Las fechas inicial y final no pueden ser posteriores a la fecha de hoy.\n\n");
-				error=true;
-			}
+//			if(desdeDatePicker.getValue().isAfter(NOW) || hastaDatePicker.getValue().isAfter(NOW)){
+//				errorMessage = errorMessage.concat("Las fechas inicial y final no pueden ser posteriores a la fecha de hoy.\n\n");
+//				error=true;
+//			}
 			if(hastaDatePicker.getValue().isBefore(desdeDatePicker.getValue())){
 				errorMessage = errorMessage.concat("La fecha final no puede ser anterior a la fecha inicial.\n\n");
 				error=true;

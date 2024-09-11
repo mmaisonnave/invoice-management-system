@@ -284,12 +284,12 @@ public class UltimosMovimientosOverviewController {
     	                                setDisable(true);
     	                                setStyle("-fx-background-color: #d3d3d3;");
     	                        }
-    	                        if (item.isAfter(
-    	                                LocalDate.now()) 
-    	                        		){
-    	                                setDisable(true);
-    	                                setStyle("-fx-background-color: #d3d3d3;");
-    	                        }
+//    	                        if (item.isAfter(
+//    	                                LocalDate.now()) 
+//    	                        		){
+//    	                                setDisable(true);
+//    	                                setStyle("-fx-background-color: #d3d3d3;");
+//    	                        }
     	                        if (item.isBefore(
     	                        		LocalDate.of(2003, 1, 1)) 
     	                        		){
@@ -309,12 +309,12 @@ public class UltimosMovimientosOverviewController {
         	                    @Override
         	                    public void updateItem(LocalDate item, boolean empty) {
         	                        super.updateItem(item, empty);
-        	                        if (item.isAfter(
-        	                                LocalDate.now()) 
-        	                        		){
-        	                                setDisable(true);
-        	                                setStyle("-fx-background-color: #d3d3d3;");
-        	                        }
+//        	                        if (item.isAfter(
+//        	                                LocalDate.now()) 
+//        	                        		){
+//        	                                setDisable(true);
+//        	                                setStyle("-fx-background-color: #d3d3d3;");
+//        	                        }
         	                        if (item.isBefore(
         	                        		LocalDate.of(2003, 1, 1)) 
         	                        		){
@@ -376,7 +376,7 @@ public class UltimosMovimientosOverviewController {
     		}
     		System.out.println(fecha_desde);
     		//Chequeo errores en las fechas
-    		boolean error = (desdeDatePicker.getValue().isAfter(NOW) || hastaDatePicker.getValue().isAfter(NOW)) || (hastaDatePicker.getValue().isBefore(desdeDatePicker.getValue()));
+    		boolean error = (hastaDatePicker.getValue().isBefore(desdeDatePicker.getValue()));
     			
     		if(error){
     				desdeDatePicker.setValue(null);
