@@ -21,6 +21,9 @@ public class Dialogs {
            Label label =  new Label(message);
            
            DatePicker datePicker = new DatePicker(LocalDate.now());
+           datePicker.setEditable(false);
+           datePicker.setDisable(true);
+
            HBox hbox_with_datepicker =  new HBox(new Label("Fecha de Efectivización: "), datePicker);
            hbox_with_datepicker.setAlignment(Pos.CENTER_LEFT);  // Aligns the Label and DatePicker
 

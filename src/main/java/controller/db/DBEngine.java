@@ -884,9 +884,16 @@ public class DBEngine {
 		if (!cliente.esValidoCodigoCliente() || cliente == null)
 			throw new InvalidClientException("Cliente no insertado en la base de datos o objeto cliente nulo.");
 
-		String query = "SELECT * " + "FROM Presupuesto " + "WHERE Codigo_Cliente = " + cliente.getCodigoCliente()
-				+ " AND " + "Fecha = " + "(SELECT  max(Fecha) " + "FROM  Presupuesto " + "WHERE  Codigo_Cliente = "
-				+ cliente.getCodigoCliente() + ")";
+//		String query = "SELECT * " + "FROM Presupuesto " + "WHERE Codigo_Cliente = " + cliente.getCodigoCliente()
+//				+ " AND " + "Fecha = " + "(SELECT  max(Fecha) " + "FROM  Presupuesto " + "WHERE  Codigo_Cliente = "
+//				+ cliente.getCodigoCliente() + ")";
+		String query = 
+				   "SELECT * " +
+	               "FROM Presupuesto " +
+	               "WHERE Codigo_Cliente = " + cliente.getCodigoCliente() + " " +
+	               "ORDER BY Fecha DESC, Nro_Presupuesto DESC " +
+	               "LIMIT 1";
+
 		Presupuesto toReturn = null;
 		Statement st;
 
